@@ -1,20 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
+import 'typeface-roboto';
+import store from './app/store';
 
-ReactDOM.render(
-  <ThemeProvider>
-    <CssBaseline />
-    <App />
-  </ThemeProvider>,
-  document.getElementById('root'),
-);
+const render = () => {
+  const App = require('./app/App').default
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  )
+}
+
+render()
 serviceWorker.unregister();
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./app/App', render)
+}
