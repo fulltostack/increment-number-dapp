@@ -6,13 +6,14 @@ import ContractCard from '../../components/ContractCard'
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const { user, contract } = props
+  const { user, contract, getContractState } = props
+  const { address } = user;
 
   useEffect(() => {
-    if (user.address) {
-      props.getContractState();
+    if (address) {
+      getContractState();
     }
-  }, [user.address]);
+  }, [address, getContractState]);
 
   return (
     <div>

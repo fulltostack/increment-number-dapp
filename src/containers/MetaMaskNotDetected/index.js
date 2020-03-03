@@ -41,7 +41,7 @@ const MetaMaskNotDetected = (props) => {
       <h2 className={classes.providerHeading}>No providers detected</h2>
       <div className={classes.providerPara}>
         <p>To be able to use our services please use the <a href={CHROME_INSTALLATION}>Chrome browser</a> and
-          installed the <a href={METAMASK_CHROME_EXTENSION}>METAMASK</a> extension.</p>
+          installed the <a target="_blank" rel="noopener noreferrer" href={METAMASK_CHROME_EXTENSION}>METAMASK</a> extension.</p>
         <p>After installation, please create an ethereum account and
             connect this to metamask.</p>
       </div>
