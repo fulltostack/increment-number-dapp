@@ -8,6 +8,8 @@ import {
    incrementVarError,
 } from './reducer';
 import IncrementContract from '../../contracts/increment'
+import { setOpen } from '../Notifications/reducer';
+
 
 function* fetchContractState(action) {
    try {
@@ -26,9 +28,12 @@ function* updateIncrementVar(action) {
       const incrementContract = new IncrementContract();
       const data = yield call(incrementContract.incrementVar.bind(incrementContract));
       yield put(incrementVarSuccess(data));
+      yield put(getContractState())
+      yield put(setOpen({ isSuccess: true, message: 'Value Incremented Successfully !' }))
    } catch (e) {
       console.log('Error updateIncrementVar----------: ', e);
       yield put(incrementVarError(e.message));
+      yield put(setOpen({ isSuccess: false, message: e.message }))
    }
 }
 

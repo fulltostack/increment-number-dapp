@@ -5,14 +5,17 @@ const configSlice = createSlice({
   initialState: {
     error: null,
     loading: false,
-    state: {},
+    state: {
+      incrementer: '',
+      incrementedValue: '',
+    },
   },
   reducers: {
     getContractState(state) {
       state.loading = true;
     },
     successInGettingContractState(state, action) {
-      state.state = action.payload.data;
+      state.state = action.payload;
       state.loading = false;
     },
     errorInGettingContractState(state, action) {

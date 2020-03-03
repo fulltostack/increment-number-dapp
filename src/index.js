@@ -4,15 +4,17 @@ import { Provider } from 'react-redux';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
-import store from './app/store';
+import store, { history } from './app/store';
+import { Router } from 'react-router';
 
 const render = () => {
   const App = require('./app/App').default
-
   ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    <Router history={history}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Router>,
     document.getElementById('root')
   )
 }

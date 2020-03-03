@@ -2,34 +2,41 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header'
 import { getContractState, incrementVar } from './reducer';
-// import PropTypes from 'prop-types';
+import Profile from '../../components/Profile'
+import PropTypes from 'prop-types';
 
 const Main = (props) => {
+  const { user, contract } = props
+
   useEffect(() => {
     props.getContractState();
-    props.incrementVar();
-  });
+  }, []);
+
   return (
     <div>
-      <Header />
+      <Header user={user} />
+      <Profile
+        user={user}
+        contract={contract}
+        incrementVar={props.incrementVar}
+        loading={props.loading}
+      />
     </div>
   );
 }
 
-// Main.propTypes = {
-//   getConfig: PropTypes.func.isRequired,
-//   location: PropTypes.string.isRequired,
-//   config: PropTypes.object,
-//   error: PropTypes.string,
-// };
+Main.propTypes = {
+  user: PropTypes.object.isRequired,
+  contract: PropTypes.object.isRequired,
+};
 
-
-// const mapDispatchToProps = { getConfig };
 const mapDispatchToProps = { getContractState, incrementVar };
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   return {
+    user: state.user,
+    contract: state.contract.state,
+    loading: state.contract.loading,
   }
 };
 

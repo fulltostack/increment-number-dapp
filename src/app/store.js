@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducer from './rootReducer';
 import sagaMiddleware from './rootSaga';
+import { createBrowserHistory } from 'history'
+import createRootReducer from './rootReducer'
+
+export const history = createBrowserHistory()
+
+const rootReducer = createRootReducer(history)
 
 const store = configureStore({
-  reducer,
   middleware: [ sagaMiddleware ],
+  reducer: rootReducer
 });
 
 if (process.env.NODE_ENV === 'development' && module.hot) {

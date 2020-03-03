@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = (props) => {
+const Header = ({ user }) => {
   const classes = useStyles();
   return (
     <AppBar position="static">
@@ -28,16 +28,16 @@ const Header = (props) => {
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          News
+        <Typography variant="button" className={classes.title}>
+          DAPP
         </Typography>
-        <Button color="inherit">Login</Button>
+        <Button color="inherit">{`Account: ${user.address}`}</Button>
       </Toolbar>
     </AppBar>
   );
 }
-// Header.propTypes = {
-//   children: PropTypes.arrayOf(PropTypes.element).isRequired,
-// };
+Header.propTypes = {
+  user: PropTypes.object.isRequired,
+};
 
 export default Header;

@@ -3,6 +3,7 @@ import { isMetamaskInstalled, initializeWeb3, isUserLoggedIn } from '../../utils
 
 import { startUpdateAccount } from '../User/reducer';
 import { updateMetaMask, updateMetaMaskAccount } from './reducer';
+import { history } from '../../app/store'
 
 function* startupSaga(action) {
    try {
@@ -15,6 +16,8 @@ function* startupSaga(action) {
          console.log('accountsAvailable:  ', accountsAvailable);
          yield put(updateMetaMaskAccount({ accountsAvailable }))
          yield put(startUpdateAccount());
+      } else {
+         history.push('/no-metamask')
       }
    } catch (e) {
       yield put(updateMetaMask({ isAvailable: false }));

@@ -1,5 +1,8 @@
 const Web3 = require('web3');
 
+export const CHROME_INSTALLATION = "https://www.google.com/chrome/browser/desktop/"
+export const METAMASK_CHROME_EXTENSTION = "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+
 export const isMetamaskInstalled = () => {
   return !!window.ethereum || !!window.web3;
 }
@@ -21,8 +24,6 @@ export const initializeWeb3 = async () => {
 
 export const getAccounts = async () => window.web3.eth.getAccounts();
 
-export const getBalance = async address => window.web3.eth.getBalance(address);
-
 export const isUserLoggedIn = () => new Promise((resolve, reject) => {
   window.web3.eth.getAccounts((err, accounts) => {
     if (err != null) {
@@ -37,4 +38,11 @@ export const getEstimateGas = async txn => window.web3.eth.estimateGas(txn);
 
 export const getGasPrice = async () => window.web3.eth.getGasPrice();
 
+export const getBalance = async address => {
+  const result = await window.web3.eth.getBalance(address)
+  return Number(window.web3.utils.fromWei(result, 'ether'))
+};
 
+export const metaMaskAccountsChanged = (callback) => {
+  window.ethereum.on('accountsChanged', callback);
+}
