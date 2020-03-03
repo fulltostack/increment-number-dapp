@@ -16,12 +16,9 @@ const matchDispatchToProps = {
   setClose,
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    notifications: state.notifications,
-  }
-}
+const mapStateToProps = (state) => ({
+  notifications: state.notifications,
+})
 
 const WrappedComponent = connect(mapStateToProps, matchDispatchToProps)(App);
 

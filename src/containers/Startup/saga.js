@@ -12,8 +12,6 @@ function* startupSaga(action) {
          yield call(initializeWeb3);
          yield put(updateMetaMask({ isAvailable: true }));
          const accountsAvailable = yield call(isUserLoggedIn);
-
-         console.log('accountsAvailable:  ', accountsAvailable);
          yield put(updateMetaMaskAccount({ accountsAvailable }))
          yield put(startUpdateAccount());
       } else {

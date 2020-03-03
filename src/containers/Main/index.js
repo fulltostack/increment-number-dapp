@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header'
 import { getContractState, incrementVar } from './reducer';
-import Profile from '../../components/Profile'
+import ContractCard from '../../components/ContractCard'
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
@@ -15,7 +15,7 @@ const Main = (props) => {
   return (
     <div>
       <Header user={user} />
-      <Profile
+      <ContractCard
         user={user}
         contract={contract}
         incrementVar={props.incrementVar}
@@ -32,7 +32,7 @@ Main.propTypes = {
 
 const mapDispatchToProps = { getContractState, incrementVar };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
     contract: state.contract.state,

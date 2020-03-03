@@ -38,7 +38,7 @@ const UserNotFound = () => {
   const classes = useStyles();
   return (
     <div className={classes.providerbg}>
-      <img src={zoomicon} />
+      <img src={zoomicon} alt="" />
       <h2 className={classes.providerheading}>No providers detected</h2>
       <div className={classes.providerpara}>
         <p>To be able to use our services please use the <a href={CHROME_INSTALLATION}>Chrome browser</a> and
@@ -47,7 +47,7 @@ const UserNotFound = () => {
             connect this to metamask.</p>
       </div>
       <a href={METAMASK_CHROME_EXTENSTION}>
-        <img src={metamaskimg} />
+        <img src={metamaskimg} alt="" />
       </a>
     </div>
   )

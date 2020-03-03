@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from './rootReducer';
 import sagaMiddleware from './rootSaga';
 import { createBrowserHistory } from 'history'
 import createRootReducer from './rootReducer'

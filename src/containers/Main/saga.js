@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { 
    getContractState, 
    successInGettingContractState, 
@@ -7,9 +7,12 @@ import {
    incrementVarSuccess,
    incrementVarError,
 } from './reducer';
-import IncrementContract from '../../contracts/increment'
 import { setOpen } from '../Notifications/reducer';
+import { startUpdateAccount } from '../User/reducer';
+import IncrementContract from '../../contracts/increment'
+import { incrementCountForAddress } from '../../utils/persistenceStorage';
 
+const getAccount = (state) => state.user.address;
 
 function* fetchContractState(action) {
    try {
@@ -22,13 +25,15 @@ function* fetchContractState(action) {
    }
 }
 
-
 function* updateIncrementVar(action) {
    try {
       const incrementContract = new IncrementContract();
       const data = yield call(incrementContract.incrementVar.bind(incrementContract));
       yield put(incrementVarSuccess(data));
+      const address = yield select(getAccount);
+      incrementCountForAddress(address);
       yield put(getContractState())
+      yield put(startUpdateAccount())
       yield put(setOpen({ isSuccess: true, message: 'Value Incremented Successfully !' }))
    } catch (e) {
       console.log('Error updateIncrementVar----------: ', e);

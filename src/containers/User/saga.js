@@ -3,6 +3,7 @@ import { eventChannel } from 'redux-saga';
 import { getAccounts, getBalance, metaMaskAccountsChanged } from '../../utils/metamask';
 import { updateAccount, startUpdateAccount, updateAccountFailure } from './reducer';
 import { setOpen } from '../Notifications/reducer';
+import { getCountForAddress } from '../../utils/persistenceStorage';
 
 function createMetaMaskAccountChannel() {
    return eventChannel(emit => {
@@ -30,8 +31,13 @@ function* updateAccountSaga() {
    try {
       const accounts = yield call(getAccounts);
       const address = accounts[0];
-      const balance = yield call(getBalance, address)
-      yield put(updateAccount({ address, balance }));
+      if (!address) {
+        yield put(updateAccount({ address: '', balance: 0, incrementCountOfUser: 0 }));
+      } else {
+        const balance = yield call(getBalance, address)
+        const count = getCountForAddress(address);
+        yield put(updateAccount({ address, balance, incrementCountOfUser: count || 0 }));
+      }
    } catch (e) {
       yield put(updateAccountFailure(e.message));
    }

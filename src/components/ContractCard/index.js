@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Profile = ({ user, contract, incrementVar, loading }) => {
+const ContractCard = ({ user, contract, incrementVar, loading }) => {
   const classes = useStyles();
 
   return (
@@ -42,7 +42,11 @@ const Profile = ({ user, contract, incrementVar, loading }) => {
                   </Typography>
                   <br />
                   <Typography variant="button" className={classes.descText}>
-                    <b>Last Incrementer:</b> {contract.incrementer} ETh
+                    <b>Last Incrementer:</b> {contract.incrementer}
+                  </Typography>
+                  <br />
+                  <Typography variant="button" className={classes.descText}>
+                    <b>Increment Count:</b> {user.incrementCountOfUser}
                   </Typography>
                   <br />
                   <Box className={classes.bottomWrapper}>
@@ -56,7 +60,7 @@ const Profile = ({ user, contract, incrementVar, loading }) => {
                   <br />
                   <Button 
                     variant="contained" 
-                    disabled={loading} 
+                    disabled={loading || !user.address} 
                     onClick={() => incrementVar()}
                   >
                     Increment
@@ -72,4 +76,4 @@ const Profile = ({ user, contract, incrementVar, loading }) => {
   );
 };
 
-export default Profile;
+export default ContractCard;
