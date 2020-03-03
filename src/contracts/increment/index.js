@@ -3,8 +3,8 @@ import abi from './abi';
 
 class IncrementContract {
 
-  constructor() {
-    this.contractAddress = '0x83000a553028c708d74e41c866e4bb187b7b042e';
+  constructor(contractAddress) {
+    this.contractAddress = contractAddress;
     this.contract = new window.web3.eth.Contract(abi, this.contractAddress);
   }
 

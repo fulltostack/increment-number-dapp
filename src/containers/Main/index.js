@@ -9,8 +9,10 @@ const Main = (props) => {
   const { user, contract } = props
 
   useEffect(() => {
-    props.getContractState();
-  }, []);
+    if (user.address) {
+      props.getContractState();
+    }
+  }, [user.address]);
 
   return (
     <div>

@@ -4,14 +4,12 @@ const configSlice = createSlice({
   name: 'metamask',
   initialState: {
     isAvailable: false,
-    accountsAvailable: false,
+    networkId: 3,
   },
   reducers: {
     updateMetaMask(state, action) {
       state.isAvailable = action.payload.isAvailable;
-    },
-    updateMetaMaskAccount(state, action) {
-      state.accountsAvailable = action.payload.accountsAvailable;
+      state.networkId = action.payload.networkId;
     },
   }
 })

@@ -1,8 +1,5 @@
 const Web3 = require('web3');
 
-export const CHROME_INSTALLATION = "https://www.google.com/chrome/browser/desktop/"
-export const METAMASK_CHROME_EXTENSTION = "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
-
 export const isMetamaskInstalled = () => {
   return !!window.ethereum || !!window.web3;
 }
@@ -21,6 +18,8 @@ export const initializeWeb3 = async () => {
     console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
   }
 }
+
+export const getNetworkId = async () => window.web3.eth.net.getId();
 
 export const getAccounts = async () => window.web3.eth.getAccounts();
 

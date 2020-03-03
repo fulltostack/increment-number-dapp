@@ -1,17 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import metamaskimg from "../../images/metamaskimg.svg";
-import zoomicon from "../../images/zoomicon.svg";
-import { METAMASK_CHROME_EXTENSTION, CHROME_INSTALLATION } from '../../utils/metamask';
+import metaMaskImg from "../../images/metaMaskImg.svg";
+import zoomIcon from "../../images/zoomIcon.svg";
+import { METAMASK_CHROME_EXTENSION, CHROME_INSTALLATION } from '../../constants';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-  },
-  providerbg: {
+  providerBg: {
     backgroundRepeat: 'no-repeat',
     height: '714px',
     display: 'flex',
@@ -21,36 +16,47 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: '100% 100%',
     flexDirection: 'column'
   },
-  providerheading: {
+  providerHeading: {
     color: '#5C5D66',
     fontSize: '30px',
     fontWeight: 'bold',
     padding: '15px 0',
   },
-  providerpara: {
+  providerPara: {
     width: '31%',
     textAlign: 'center',
   }
-
 }));
 
-const UserNotFound = () => {
+const MetaMaskNotDetected = (props) => {
   const classes = useStyles();
+
+  if(props.metamask.isAvailable) {
+    props.history.push('/');
+  }
+
   return (
-    <div className={classes.providerbg}>
-      <img src={zoomicon} alt="" />
-      <h2 className={classes.providerheading}>No providers detected</h2>
-      <div className={classes.providerpara}>
+    <div className={classes.providerBg}>
+      <img src={zoomIcon} alt="" />
+      <h2 className={classes.providerHeading}>No providers detected</h2>
+      <div className={classes.providerPara}>
         <p>To be able to use our services please use the <a href={CHROME_INSTALLATION}>Chrome browser</a> and
-          installed the <a href={METAMASK_CHROME_EXTENSTION}>METAMASK</a> extension.</p>
+          installed the <a href={METAMASK_CHROME_EXTENSION}>METAMASK</a> extension.</p>
         <p>After installation, please create an ethereum account and
             connect this to metamask.</p>
       </div>
-      <a href={METAMASK_CHROME_EXTENSTION}>
-        <img src={metamaskimg} alt="" />
+      <a href={METAMASK_CHROME_EXTENSION}>
+        <img src={metaMaskImg} alt="" />
       </a>
     </div>
   )
 }
 
-export default UserNotFound
+const mapStateToProps = (state) => ({
+  metamask: state.metamask,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(MetaMaskNotDetected);
