@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
-import configReducer from '../containers/Main/reducer';
+import metamask from '../containers/Startup/reducer';
+import user from '../containers/User/reducer';
 
-export default combineReducers({ config: configReducer });
+export default combineReducers({ metamask, user });

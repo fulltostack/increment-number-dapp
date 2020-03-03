@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Header from '../../components/Header'
 // import { getConfig } from './reducer';
 // import PropTypes from 'prop-types';
 
 const Main = (props) => {
   return (
     <div>
-      <h1>Hi There!</h1>  
+      <Header />
     </div>
   );
 }
@@ -23,6 +24,7 @@ const Main = (props) => {
 const mapDispatchToProps = { };
 
 const mapStateToProps = (state, props) => {
+  console.log(state);
   return {
   }
 };
