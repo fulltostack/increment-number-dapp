@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
-import fetchConfigSaga from '../containers/Main/saga';
+import fetchContractStateSaga from '../containers/Main/saga';
 import startupSaga from '../containers/Startup/saga';
 import userSaga from '../containers/User/saga';
 
@@ -9,7 +9,7 @@ function* rootSaga() {
     [ 
       fork(startupSaga),
       fork(userSaga),
-      fork(fetchConfigSaga), 
+      fork(fetchContractStateSaga), 
     ]
   );
 }

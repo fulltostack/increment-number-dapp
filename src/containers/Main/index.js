@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header'
-// import { getConfig } from './reducer';
+import { getContractState, incrementVar } from './reducer';
 // import PropTypes from 'prop-types';
 
 const Main = (props) => {
+  useEffect(() => {
+    props.getContractState();
+    props.incrementVar();
+  });
   return (
     <div>
       <Header />
@@ -21,7 +25,7 @@ const Main = (props) => {
 
 
 // const mapDispatchToProps = { getConfig };
-const mapDispatchToProps = { };
+const mapDispatchToProps = { getContractState, incrementVar };
 
 const mapStateToProps = (state, props) => {
   console.log(state);

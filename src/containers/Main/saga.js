@@ -1,20 +1,40 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-// import { getRequest } from '../../utils/api';
-import { getContractState, successInGettingContractState, errorInGettingContractState } from './reducer';
-// import { BASE_URL } from  '../../utils/constant';
+import { 
+   getContractState, 
+   successInGettingContractState, 
+   errorInGettingContractState, 
+   incrementVar,
+   incrementVarSuccess,
+   incrementVarError,
+} from './reducer';
+import IncrementContract from '../../contracts/increment'
 
-function* fetchConfig(action) {
+function* fetchContractState(action) {
    try {
-      // const data = yield call(getRequest, `${BASE_URL}${action.payload}.json`);
-      const data = {};
-      yield put({ type: successInGettingContractState.type, payload: { data, path: action.payload }});
+      const incrementContract = new IncrementContract();
+      const data = yield call(incrementContract.getState.bind(incrementContract));
+      yield put(successInGettingContractState(data));
    } catch (e) {
-      yield put({ type: errorInGettingContractState.type, payload: e.message });
+      console.log('Error fetchContractState----------: ', e);
+      yield put(errorInGettingContractState(e.message));
    }
 }
 
-function* fetchConfigSaga() {
-  yield takeEvery(getContractState.type, fetchConfig);
+
+function* updateIncrementVar(action) {
+   try {
+      const incrementContract = new IncrementContract();
+      const data = yield call(incrementContract.incrementVar.bind(incrementContract));
+      yield put(incrementVarSuccess(data));
+   } catch (e) {
+      console.log('Error updateIncrementVar----------: ', e);
+      yield put(incrementVarError(e.message));
+   }
 }
 
-export default fetchConfigSaga;
+function* fetchContractStateSaga() {
+  yield takeEvery(getContractState.type, fetchContractState);
+  yield takeEvery(incrementVar.type, updateIncrementVar);
+}
+
+export default fetchContractStateSaga;

@@ -1,27 +1,24 @@
 import { call, put } from 'redux-saga/effects';
-import { isMetamaskInstalled, initializeWeb3 } from '../../utils/metamask';
+import { isMetamaskInstalled, initializeWeb3, isUserLoggedIn } from '../../utils/metamask';
 
 import { startUpdateAccount } from '../User/reducer';
+import { updateMetaMask, updateMetaMaskAccount } from './reducer';
 
 function* startupSaga(action) {
    try {
-      console.log('Starting UP: --');
       const isInstalled = isMetamaskInstalled();
       if(isInstalled) {
-         // yield call(initializeWeb3);
-         console.log('--Startinf Initialisation');
          yield call(initializeWeb3);
-         console.log('--Ending Initialisation');
-         yield put(startUpdateAccount())
-         // const accounts = yield call(getAccounts);
-         // console.log(accounts);
+         yield put(updateMetaMask({ isAvailable: true }));
+         const accountsAvailable = yield call(isUserLoggedIn);
+
+         console.log('accountsAvailable:  ', accountsAvailable);
+         yield put(updateMetaMaskAccount({ accountsAvailable }))
+         yield put(startUpdateAccount());
       }
    } catch (e) {
+      yield put(updateMetaMask({ isAvailable: false }));
    }
 }
-
-// function* startupSaga() {
-//   yield takeEvery(appStartingUp.type, startingUp);
-// }
 
 export default startupSaga;
