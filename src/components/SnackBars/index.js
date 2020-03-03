@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,5 +37,12 @@ const Snackbars = ({ isSuccess, message, open, setClose }) => {
     </div>
   );
 }
+
+Snackbars.propTypes = {
+  setClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+  isSuccess: PropTypes.bool.isRequired,
+};
 
 export default Snackbars;

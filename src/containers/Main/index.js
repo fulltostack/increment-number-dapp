@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../../components/Header'
 import { getContractState, incrementVar } from './reducer';
 import ContractCard from '../../components/ContractCard'
-import PropTypes from 'prop-types';
 
 const Main = (props) => {
   const { user, contract, getContractState } = props
@@ -31,6 +31,8 @@ const Main = (props) => {
 Main.propTypes = {
   user: PropTypes.object.isRequired,
   contract: PropTypes.object.isRequired,
+  getContractState: PropTypes.func.isRequired,
+  incrementVar: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = { getContractState, incrementVar };

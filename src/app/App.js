@@ -10,7 +10,7 @@ const App = (props) => (
     <Snackbars { ...props.notifications} setClose={props.setClose} />
     {routes}
   </React.Fragment>
-)
+);
 
 const matchDispatchToProps = {
   setClose,
@@ -18,12 +18,11 @@ const matchDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   notifications: state.notifications,
-})
+});
 
 const WrappedComponent = connect(mapStateToProps, matchDispatchToProps)(App);
 
 export default () => {
   startSaga();
   return <WrappedComponent />
-}
-
+};

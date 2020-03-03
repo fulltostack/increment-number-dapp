@@ -12,12 +12,12 @@ function* rootSaga() {
       fork(fetchContractStateSaga), 
     ]
   );
-}
+};
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
 export const startSaga = () => {
   sagaMiddleware.run(rootSaga);
-}
+};
 
 export default sagaMiddleware;

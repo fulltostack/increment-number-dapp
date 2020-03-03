@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -74,6 +75,13 @@ const ContractCard = ({ user, contract, incrementVar, loading }) => {
       </Grid>
     </Box>
   );
+};
+
+ContractCard.propTypes = {
+  user: PropTypes.object.isRequired,
+  contract: PropTypes.object.isRequired,
+  incrementVar: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default ContractCard;

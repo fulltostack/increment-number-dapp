@@ -11,5 +11,5 @@ export const NETWORK_CHAIN_ID = {
   42:	'Kovan',
 };
 
-export const CHROME_INSTALLATION = "https://www.google.com/chrome/browser/desktop/"
-export const METAMASK_CHROME_EXTENSION = "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+export const CHROME_INSTALLATION = 'https://www.google.com/chrome/browser/desktop/';
+export const METAMASK_CHROME_EXTENSION = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en';
