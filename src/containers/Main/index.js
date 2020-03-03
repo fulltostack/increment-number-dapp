@@ -1,33 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header'
-// import { getConfig } from './reducer';
-// import PropTypes from 'prop-types';
+import Profile from '../../components/Profile'
+import PropTypes from 'prop-types';
 
 const Main = (props) => {
+  const { address, balance } = props
   return (
     <div>
       <Header />
+      <Profile
+        address={address}
+        balance={balance}
+      />
     </div>
   );
 }
 
-// Main.propTypes = {
-//   getConfig: PropTypes.func.isRequired,
-//   location: PropTypes.string.isRequired,
-//   config: PropTypes.object,
-//   error: PropTypes.string,
-// };
-
-
-// const mapDispatchToProps = { getConfig };
-const mapDispatchToProps = { };
-
-const mapStateToProps = (state, props) => {
-  console.log(state);
-  return {
-  }
+Main.propTypes = {
+  address: PropTypes.string.isRequired,
+  balance: PropTypes.string.isRequired,
 };
+
+const mapDispatchToProps = {};
+
+const mapStateToProps = (state, props) => ({
+  address: state.user.address,
+  balance: state.user.balance,
+});
 
 export default connect(
   mapStateToProps,
