@@ -1,5 +1,3 @@
-# MixByte Test Task
-
 ## Problem Statement
   
 Your task will be to write a simple DAPP.
